@@ -1,0 +1,25 @@
+<div>
+	<table class="table table-striped table-bordered table-hover" id="tickettable">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Created By</th>
+				<th>Assigned To</th>
+				<th>Status</th>
+				<th>Category</th>
+				<th></th>
+				<!--<th><a href="/create"><i class="glyphicon glyphicon-plus-sign"></i></a></th>-->
+			</tr>
+		</thead >
+		<tbody>
+			<tr ng-repeat="ticket in tickets | orderBy:[timestamp]" ng-click="alert(afsdsdafd)">
+				<td class="span6"class="pad">{{ticket.custname}}</td>
+				<td class="span6" class="pad">{{ticket.createdby.name}}</td>
+				<td class="span6">{{ticket.assignedto.name}}</td>
+				<td class ="span6" class="pad">{{ticket.status.name}}</td>
+				<td class ="span6" class="pad">{{ticket.category.name}}</td>
+				<td class="span2" class="pad"><a class="btn btn-info btn-xs" href="/edit/{{ticket.id.$oid}}">View/Edit</a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

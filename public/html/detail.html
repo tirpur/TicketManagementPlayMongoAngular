@@ -1,0 +1,104 @@
+<div class="container">
+<form name="detailForm" role="form" class="well form-horizontal">
+<fieldset>
+	<div class="control-group">
+			<span class="control-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+			<label class="control-label" for="custname">Customer Name</label>
+		<input type="text" class="form-control" id="custname" name="custname" data-ng-model="ticket.custname"
+			   placeholder="Enter customer name" ng-disabled="isClosed()" required>
+		<span data-ng-show="detailForm.custname.$error.required" class="help-inline">Required</span>
+	</div>
+
+	<div ng-class="{ 'has-error': detailForm.email.$invalid }" class="control-group">
+		<span class="control-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+		<label class="control-label" for="email">Customer Email</label>
+		<input type="email" class="form-control" id="email" name="email" data-ng-model="ticket.email"
+			   placeholder="Enter customer email" ng-disabled="isClosed()" required>
+		<span data-ng-show="detailForm.email.$error.required" class="help-inline">Enter valid email</span>
+	</div>
+
+	<div class="control-group">
+		<span class="control-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+		<label class="control-label" for="phone">Customer Phone</label>
+		<input type="text" class="form-control" id="phone" name="phone" data-ng-model="ticket.phone"
+			   placeholder="Enter customer phone" ng-disabled="isClosed()">
+	</div>
+
+	<div class="control-group">
+		<span class="control-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+		<label class="control-label" for="createdby">Created By</label>
+		<select name="createdby" id="createdby"
+				ng-options="csr.name for csr in csrs track by csr.email"
+				ng-model="ticket.createdby" ng-disabled="isClosed()" required>
+			<option value="">Select a user</option>
+		</select>
+
+		<span data-ng-show="detailForm.createdby.$error.required" class="help-inline">Required</span>
+
+		<!--<input type="text" class="form-control" id="createdby" name="createdby" data-ng-model="ticket.createdby" placeholder="Created By" required>-->
+		<!--<span data-ng-show="detailForm.createdby.$error.required" class="help-inline">Required</span>-->
+	</div>
+
+	<div class="control-group">
+		<span class="control-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+
+		<label class="control-label" for="assignedto">Assigned To</label>
+		<select name="assignedto" id="assignedto"
+				ng-options="assignee.name for assignee in assignees track by assignee.email"
+				ng-model="ticket.assignedto" ng-disabled="isClosed()">
+			<option value="">Select a user</option>
+		</select>
+
+		<!--<input type="text" class="form-control" id="assignedto" name="assignedto" data-ng-model="ticket.assignedto" placeholder="Assigned To" required>-->
+		<!--<span data-ng-show="detailForm.assignedto.$error.required" class="help-inline">Required</span>-->
+	</div>
+
+	<div class="control-group">
+		<span class="control-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+
+		<label class="control-label" for="status">Status</label>
+		<select name="status" id="status"
+				ng-init="ticket.status=ticketStates[0]"
+				ng-options="status.name for status in ticketStates track by status.code"
+				ng-model="ticket.status"
+				ng-disabled="isClosed()" required></select>
+		<span data-ng-show="detailForm.status.$error.required" class="help-inline">Required</span>
+
+		<!--<input type="text" class="form-control" id="status" name="status" data-ng-model="ticket.status" placeholder="Status" required>-->
+		<!--<span data-ng-show="detailForm.status.$error.required" class="help-inline">Required</span>-->
+	</div>
+
+	<div class="control-group">
+		<span class="control-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+
+		<label class="control-label" for="category">Category</label>
+		<select name="category" id="category"
+				ng-options="category.name for category in categories track by category.name"
+				ng-model="ticket.category" ng-disabled="isClosed()" required>
+			<option value="">Select a category</option>
+		</select>
+		<span data-ng-show="detailForm.category.$error.required" class="help-inline">Required</span>
+
+		<!--<input type="text" class="form-control" id="category" name="category" data-ng-model="ticket.category" placeholder="Category" required>-->
+		<!--<span data-ng-show="detailForm.category.$error.required" class="help-inline">Required</span>-->
+	</div>
+
+	<div class="control-group">
+		<span class="control-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+		<label class="control-label" for="comment">Comment</label>
+		<textarea type="text" class="form-control" id="comment" name="comment" data-ng-model="ticket.comment"
+				  placeholder="Enter Comments" ng-disabled="isClosed()" required></textarea>
+		<span data-ng-show="detailForm.category.$error.required" class="help-inline">Required</span>
+	</div>
+
+	<br />
+	
+	<!--<a href="/" class="btn btn-default">Cancel</a>-->
+	<button data-ng-click="go('/')" class="btn btn-default">Back</button>
+	<button data-ng-click="save()" data-ng-disabled="noChange() || detailForm.$invalid || newOrOpen() || closeAllowed()" class="btn btn-primary">Save Ticket</button>
+	<!--<button data-ng-click="close()" class="btn btn-primary">Close Ticket</button>-->
+
+	<!--<button data-ng-click="delete()" data-ng-show="ticket.id.$oid" class="btn btn-danger">Delete</button>-->
+</fieldset>
+</form>
+</div>
